@@ -5,9 +5,14 @@ import getWeb3 from "./getWeb3";
 import "./App.css";
 
 class App extends Component {
-  state = { storageValue: 0, web3: null, accounts: null, contract: null };
 
-  componentDidMount = async () => {
+  constructor(props) {
+    super(props);
+
+    this.state = { storageValue: 0, web3: null, accounts: null, contract: null };
+  }
+
+  async componentDidMount() {
     try {
       // Get network provider and web3 instance.
       const web3 = await getWeb3();
@@ -33,9 +38,9 @@ class App extends Component {
       );
       console.error(error);
     }
-  };
+  }
 
-  runExample = async () => {
+  async runExample() {
     const { accounts, contract } = this.state;
 
     // Stores a given value, 5 by default.
@@ -46,7 +51,7 @@ class App extends Component {
 
     // Update state with the result.
     this.setState({ storageValue: response });
-  };
+  }
 
   render() {
     if (!this.state.web3) {
